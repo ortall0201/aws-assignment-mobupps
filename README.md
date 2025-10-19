@@ -255,12 +255,12 @@ aws-assignment-mobupps/
 │   ├── models/schemas.py       # Pydantic request/response models
 │   ├── routers/api_v1.py       # API endpoint definitions
 │   ├── services/               # Core business logic
-│   │   ├── ab_testing.py       # A/B test sticky assignment
+│   │   ├── ab_test.py          # A/B test sticky assignment
 │   │   ├── embeddings.py       # Embedding generation (v1: 64-dim, v2: 128-dim)
 │   │   ├── similarity.py       # Cosine similarity search
 │   │   └── predictor.py        # Performance prediction from historical CTR
 │   ├── utils/                  # Utilities
-│   │   ├── logging_config.py   # Structured logging with correlation IDs
+│   │   ├── logging.py          # Structured logging with correlation IDs
 │   │   └── data_loader.py      # Google Drive data loader
 │   └── instrumentation/        # Monitoring
 │       └── metrics.py          # Request/latency/A/B metrics collection
