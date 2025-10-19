@@ -46,6 +46,12 @@ data/*.parquet
 # Keep directory structure
 !data/.gitkeep
 
+# Frontend dependencies and build
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/bun.lockb
+
 # Logs
 *.log
 

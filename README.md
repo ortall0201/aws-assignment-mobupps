@@ -51,27 +51,27 @@ docker run -p 8000:8000 --env-file .env aws-assignment-mobupps:local
 
 ## Web UI Dashboard
 
-A modern React dashboard is available for this API at:
-**Repository**: `https://github.com/ortall0201/mobdups-lab-suite`
+A modern React dashboard is included in the `frontend/` directory.
 
 ### Quick Setup
 ```bash
-# Clone UI repository
-git clone https://github.com/ortall0201/mobdups-lab-suite
-cd mobdups-lab-suite
+# From project root
+cd frontend
 
-# Install and run
+# Install dependencies
 npm install
+
+# Run development server
 npm run dev
 ```
 
-The UI will be available at `http://localhost:5173` and includes:
-- **Search Page**: Interactive similarity search with A/B testing
-- **Predict Page**: Performance prediction interface
-- **Metrics Dashboard**: Real-time operational metrics with auto-refresh
-- **API Docs**: Integrated API documentation
+The UI will be available at `http://localhost:8080` and includes:
+- **Search Page** (`/`): Interactive similarity search with A/B testing
+- **Predict Page** (`/predict`): Performance prediction interface
+- **Metrics Dashboard** (`/metrics`): Real-time operational metrics with auto-refresh
+- **API Docs** (`/docs`): Integrated API documentation
 
-See `UI_INTEGRATION.md` for detailed integration documentation.
+See `frontend/INTEGRATION_COMPLETE.md` for detailed setup and testing guide.
 
 ## API Endpoints
 
@@ -162,16 +162,26 @@ Access metrics via `GET /metrics` endpoint.
 
 ```
 aws-assignment-mobupps/
-├── app/
+├── app/                     # Backend (FastAPI)
 │   ├── main.py              # FastAPI app
 │   ├── config.py            # Configuration
 │   ├── models/schemas.py    # Pydantic models
 │   ├── routers/             # API routes
 │   ├── services/            # Business logic (A/B, embeddings, similarity, prediction)
-│   └── utils/               # Utilities (logging, data loader)
+│   ├── utils/               # Utilities (logging, data loader)
+│   └── instrumentation/     # Metrics collection
+├── frontend/                # UI Dashboard (React + TypeScript)
+│   ├── src/
+│   │   ├── components/      # React components
+│   │   ├── pages/           # Page components
+│   │   ├── lib/             # API service layer
+│   │   └── hooks/           # Custom hooks
+│   ├── public/              # Static assets
+│   └── package.json         # Frontend dependencies
 ├── data/                    # Data files (downloaded from Google Drive)
 ├── tests/                   # Unit tests
-└── Dockerfile
+├── Dockerfile               # Backend container
+└── UI_INTEGRATION.md        # Integration documentation
 ```
 
 ## Architecture
