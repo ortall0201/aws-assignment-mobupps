@@ -167,6 +167,11 @@ def record_ab_assignment(endpoint: str, arm: str) -> None:
     _metrics_collector.record_ab_assignment(endpoint, arm)
 
 
+def record_request_latency(endpoint: str, latency_ms: float) -> None:
+    """Convenience function to record request latency only (without full request details)"""
+    _metrics_collector.latencies_by_endpoint[endpoint].add_sample(latency_ms)
+
+
 def record_error(error_type: str) -> None:
     """Convenience function to record an error"""
     _metrics_collector.record_error(error_type)

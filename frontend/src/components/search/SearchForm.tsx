@@ -62,8 +62,8 @@ export const SearchForm = ({ onResults, isLoading, setIsLoading }: SearchFormPro
       // Transform backend response to UI format
       const similarApps = result.neighbors.map(neighbor => ({
         app_id: neighbor.app_id,
-        app_name: neighbor.app_id, // Use app_id as name for now
-        category: data.category || "Unknown",
+        app_name: neighbor.app_name || neighbor.app_id, // Use real app name from backend
+        category: neighbor.category || "Unknown", // Use real category from backend
         similarity_score: neighbor.similarity,
       }));
 
@@ -71,7 +71,7 @@ export const SearchForm = ({ onResults, isLoading, setIsLoading }: SearchFormPro
         ab_arm: result.ab_arm,
         similar_apps: similarApps,
         correlation_id: correlationId,
-      });
+      }, payload.app);
 
       // Save to history
       const history = JSON.parse(localStorage.getItem("searchHistory") || "[]");

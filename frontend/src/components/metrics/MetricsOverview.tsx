@@ -11,10 +11,18 @@ export const MetricsOverview = ({ metrics }: MetricsOverviewProps) => {
     const days = Math.floor(seconds / 86400);
     const hours = Math.floor((seconds % 86400) / 3600);
     const mins = Math.floor((seconds % 3600) / 60);
-    
+
     if (days > 0) return `${days}d ${hours}h`;
     if (hours > 0) return `${hours}h ${mins}m`;
     return `${mins}m`;
+  };
+
+  // Calculate real success rate from status codes
+  const calculateSuccessRate = () => {
+    const successCount = parseInt(metrics.status_codes["200"] || "0");
+    const total = metrics.total_requests;
+    if (total === 0) return "0.0%";
+    return `${((successCount / total) * 100).toFixed(1)}%`;
   };
 
   const stats = [
@@ -41,7 +49,7 @@ export const MetricsOverview = ({ metrics }: MetricsOverviewProps) => {
     },
     {
       title: "Success Rate",
-      value: "99.9%",
+      value: calculateSuccessRate(),
       icon: CheckCircle,
       color: "text-success",
       bg: "bg-success/10",

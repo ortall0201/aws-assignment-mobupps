@@ -17,7 +17,7 @@ interface PredictFormProps {
 }
 
 export const PredictForm = ({ onResults, isLoading, setIsLoading }: PredictFormProps) => {
-  const { register, handleSubmit, setValue } = useForm();
+  const { register, handleSubmit, setValue, formState: { errors } } = useForm();
   const [abArm, setAbArm] = useState("v1");
 
   const onSubmit = async (data: any) => {
@@ -92,20 +92,22 @@ export const PredictForm = ({ onResults, isLoading, setIsLoading }: PredictFormP
           <Label htmlFor="appId">App ID</Label>
           <Input
             id="appId"
-            {...register("appId", { required: true })}
+            {...register("appId", { required: "App ID is required" })}
             placeholder="app_456"
             className="bg-background"
           />
+          {errors.appId && <p className="text-sm text-destructive">{errors.appId.message as string}</p>}
         </div>
 
         <div className="space-y-2">
           <Label htmlFor="partnerId">Partner ID</Label>
           <Input
             id="partnerId"
-            {...register("partnerId", { required: true })}
+            {...register("partnerId", { required: "Partner ID is required" })}
             placeholder="partner_789"
             className="bg-background"
           />
+          {errors.partnerId && <p className="text-sm text-destructive">{errors.partnerId.message as string}</p>}
         </div>
       </div>
 
@@ -131,10 +133,11 @@ export const PredictForm = ({ onResults, isLoading, setIsLoading }: PredictFormP
         </Label>
         <Textarea
           id="neighborResults"
-          {...register("neighborResults", { required: true })}
+          {...register("neighborResults", { required: "Neighbor results are required - please run a search first to get similar apps" })}
           placeholder={exampleNeighbors}
           className="bg-background font-mono text-sm h-32"
         />
+        {errors.neighborResults && <p className="text-sm text-destructive">{errors.neighborResults.message as string}</p>}
       </div>
 
       <Button type="submit" disabled={isLoading} className="w-full bg-gradient-primary hover:opacity-90">

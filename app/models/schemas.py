@@ -21,6 +21,8 @@ class SimilarRequest(BaseModel):
 class Neighbor(BaseModel):
     app_id: str
     similarity: float
+    app_name: Optional[str] = None
+    category: Optional[str] = None
 
 
 class SimilarResponse(BaseModel):

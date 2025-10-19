@@ -28,8 +28,32 @@ class EmbeddingsStore:
     def get_by_arm(self, arm: Arm):
         return self.load_v1() if arm == "v1" else self.load_v2()
 
-    def vectorize(self, app_meta: dict) -> list[float]:
-        # דמו: החזר וקטור פשוט לפי האש של שדות (בפועל: מודל/lookup)
+    def vectorize(self, app_meta: dict, arm: str = "v1") -> list[float]:
+        """
+        Generate embedding vector for new app.
+        v1: 64 dimensions (simpler model)
+        v2: 128 dimensions (more sophisticated model)
+        """
         import random
+        import numpy as np
+
+        # Determine dimensions based on arm
+        dim = 64 if arm == "v1" else 128
+
+        # Base vector from app metadata
         random.seed(hash(str(app_meta)) % (2**32))
-        return [random.random() for _ in range(64)]
+        base = np.array([random.random() for _ in range(dim)])
+
+        # Add category signal if present
+        category = app_meta.get('category', '')
+        if category:
+            cat_hash = hash(str(category)) % (2**32)
+            random.seed(cat_hash)
+            # v2 has stronger category signal
+            strength = 0.3 if arm == "v1" else 0.6
+            cat_signal = np.array([random.random() for _ in range(dim)]) * strength
+            base += cat_signal
+
+        # Normalize
+        norm = np.linalg.norm(base)
+        return (base / (norm + 1e-9)).tolist()

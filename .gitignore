@@ -34,7 +34,7 @@ env/
 *~
 
 # Environment variables
-.env
+# .env - Committed to repo (no secrets)
 .env.local
 
 # Data files (large files from Google Drive)

@@ -19,7 +19,13 @@ export interface SearchResponse {
 
 const Search = () => {
   const [results, setResults] = useState<SearchResponse | null>(null);
+  const [appData, setAppData] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);
+
+  const handleResults = (newResults: SearchResponse, searchData?: any) => {
+    setResults(newResults);
+    setAppData(searchData);
+  };
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -44,8 +50,8 @@ const Search = () => {
         {/* Search Form */}
         <Card className="shadow-glass border-border/50">
           <CardContent className="p-6">
-            <SearchForm 
-              onResults={setResults} 
+            <SearchForm
+              onResults={handleResults}
               isLoading={isLoading}
               setIsLoading={setIsLoading}
             />
@@ -53,7 +59,7 @@ const Search = () => {
         </Card>
 
         {/* Results */}
-        {results && <SearchResults results={results} />}
+        {results && <SearchResults results={results} appData={appData} />}
       </div>
     </div>
   );

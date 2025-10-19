@@ -1,6 +1,17 @@
-# MobUpps – AB Similarity & Predict API (Part B)
+# MobUpps – A/B Testing System for Mobile App Similarity & Performance Prediction
 
-A/B testing system for similarity search and performance prediction using embeddings.
+A comprehensive full-stack A/B testing system that finds similar mobile apps using ML embeddings and predicts performance based on historical data.
+
+**📚 Complete Documentation: See [DOCUMENTATION.md](DOCUMENTATION.md) for comprehensive setup, usage, and API reference.**
+
+## Overview
+
+This system provides:
+- **A/B Testing**: Compare two embedding models (v1: 64-dim vs v2: 128-dim) with sticky session assignment
+- **Similarity Search**: Find similar apps using cosine similarity on ML-generated embeddings
+- **Performance Prediction**: Predict app performance using weighted averages from historical CTR data
+- **Full-Stack Application**: FastAPI backend + React TypeScript frontend with modern UI
+- **Production Ready**: Structured logging, metrics collection, Docker support, and comprehensive monitoring
 
 ## Setup
 
@@ -31,159 +42,174 @@ source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-## Run Locally
+### 3. Run Backend
 
 ```bash
+# Start FastAPI backend
 uvicorn app.main:app --reload --port 8000
 ```
 
-The app will automatically download data files from Google Drive on first startup.
+The backend will automatically download data files from Google Drive on first startup.
 
-## Run with Docker
+Backend API will be available at: `http://localhost:8000`
+
+### 4. Run Frontend
 
 ```bash
-# Build
+# From project root, navigate to frontend
+cd frontend
+
+# Install dependencies (first time only)
+npm install
+
+# Run development server with hot reload
+npm run dev
+```
+
+Frontend UI will be available at: `http://localhost:8080`
+
+## Quick Start
+
+Once both backend and frontend are running:
+
+1. **Navigate to Search page** (`http://localhost:8080/`)
+2. **Fill in the search form** with example values:
+   - App Name: `Fitness Tracker Pro`
+   - Category: `Health & Fitness`
+   - Region: `US`
+   - Pricing Model: `freemium`
+   - Top K Results: `20`
+3. **Click "Find Similar Apps"** - system will use v1 or v2 model (A/B test)
+4. **View results** with real app names and similarity scores
+5. **Click "Predict Performance"** button below results to see performance predictions
+
+See [DOCUMENTATION.md](DOCUMENTATION.md) for detailed user guide with screenshots and explanations.
+
+## Features
+
+### Frontend UI (`http://localhost:8080`)
+- **Search Page** (`/`): Interactive similarity search with A/B testing, inline performance prediction
+- **Predict Page** (`/predict`): Standalone performance prediction interface (advanced usage)
+- **Metrics Dashboard** (`/metrics`): Real-time operational metrics with auto-refresh
+- **API Docs** (`/docs`): Integrated Swagger/OpenAPI documentation
+
+### Backend API (`http://localhost:8000`)
+- **A/B Testing**: Sticky session assignment (v1 vs v2 models)
+- **Similarity Search**: Cosine similarity with configurable filters
+- **Performance Prediction**: Weighted CTR-based predictions from historical data
+- **Metrics Collection**: Request counts, latency percentiles, A/B assignments
+- **Structured Logging**: Correlation IDs, JSON output, colorized console
+
+## Docker Deployment
+
+```bash
+# Build backend image
 docker build -t aws-assignment-mobupps:local .
 
 # Run with environment file
 docker run -p 8000:8000 --env-file .env aws-assignment-mobupps:local
 ```
 
-## Web UI Dashboard
+For production deployment, see [DOCUMENTATION.md](DOCUMENTATION.md).
 
-A modern React dashboard is included in the `frontend/` directory.
+## API Endpoints (Quick Reference)
 
-### Quick Setup
+**Full API documentation with detailed examples: [DOCUMENTATION.md](DOCUMENTATION.md#api-reference)**
+
+### Core Endpoints
+- `GET /healthz` - Health check
+- `GET /metrics` - Operational metrics (request counts, latency percentiles, A/B assignments)
+- `POST /api/v1/find-similar` - Find similar apps with A/B testing
+- `POST /api/v1/predict` - Predict performance from neighbor apps
+
+### Example: Find Similar Apps
 ```bash
-# From project root
-cd frontend
-
-# Install dependencies
-npm install
-
-# Run development server
-npm run dev
-```
-
-The UI will be available at `http://localhost:8080` and includes:
-- **Search Page** (`/`): Interactive similarity search with A/B testing
-- **Predict Page** (`/predict`): Performance prediction interface
-- **Metrics Dashboard** (`/metrics`): Real-time operational metrics with auto-refresh
-- **API Docs** (`/docs`): Integrated API documentation
-
-See `frontend/INTEGRATION_COMPLETE.md` for detailed setup and testing guide.
-
-## API Endpoints
-
-### Health Check
-```
-GET /healthz
-```
-
-### Metrics
-```
-GET /metrics
-```
-Returns operational metrics including:
-- Request counts (total, by endpoint, by status code)
-- Latency statistics (avg, min, max, p50, p95, p99)
-- A/B test assignments by arm and endpoint
-- Error counts by type
-
-### Find Similar Apps
-```
-POST /api/v1/find-similar
-Content-Type: application/json
-
-{
-  "app": {
-    "name": "FitNow",
-    "category": "Health & Fitness",
-    "region": "US",
-    "pricing": "freemium",
-    "features": ["sharing", "tracking"]
-  },
-  "filters": {"region": ["US"], "category": ["Health & Fitness"]},
-  "top_k": 20,
-  "partner_id": "partner-123",
-  "app_id": "fitnow-001"
-}
-```
-
-### Predict Performance
-```
-POST /api/v1/predict
-Content-Type: application/json
-
-{
-  "app": {
-    "name": "FitNow",
-    "category": "Health & Fitness",
-    "region": "US",
-    "pricing": "freemium",
-    "features": ["sharing", "tracking"]
-  },
-  "neighbors": [
-    {"app_id": "app_42", "similarity": 0.93},
-    {"app_id": "app_7", "similarity": 0.90}
-  ],
-  "ab_arm": "v2"
-}
+curl -X POST http://localhost:8000/api/v1/find-similar \
+  -H "Content-Type: application/json" \
+  -d '{
+    "app": {
+      "name": "Fitness Tracker Pro",
+      "category": "Health & Fitness",
+      "region": "US",
+      "pricing": "freemium"
+    },
+    "top_k": 20,
+    "partner_id": "partner-123"
+  }'
 ```
 
 ## Testing
 
 ```bash
+# Run all tests
 pytest -q
+
+# Run with coverage
+pytest --cov=app tests/
 ```
-
-## Logging & Monitoring
-
-### Structured Logging
-The API includes structured logging with:
-- Correlation ID tracking across requests
-- Request/response logging with timing
-- A/B test assignment logging
-- Colorized console output for development
-- JSON output for production (set `structured=True` in `main.py`)
-
-All logs include correlation IDs for tracing requests across services.
-
-### Metrics Collection
-Real-time metrics are collected for:
-- **Request Metrics**: Total requests, requests per endpoint, status code distribution
-- **Latency Metrics**: Average, min, max, and percentiles (p50, p95, p99) per endpoint
-- **A/B Test Metrics**: Assignment counts by arm and endpoint
-- **Error Metrics**: Total errors and errors by type
-
-Access metrics via `GET /metrics` endpoint.
 
 ## Project Structure
 
 ```
 aws-assignment-mobupps/
-├── app/                     # Backend (FastAPI)
-│   ├── main.py              # FastAPI app
-│   ├── config.py            # Configuration
-│   ├── models/schemas.py    # Pydantic models
-│   ├── routers/             # API routes
-│   ├── services/            # Business logic (A/B, embeddings, similarity, prediction)
-│   ├── utils/               # Utilities (logging, data loader)
-│   └── instrumentation/     # Metrics collection
-├── frontend/                # UI Dashboard (React + TypeScript)
+├── app/                        # Backend (FastAPI)
+│   ├── main.py                 # FastAPI application entry point
+│   ├── config.py               # Settings and configuration
+│   ├── models/schemas.py       # Pydantic request/response models
+│   ├── routers/api_v1.py       # API endpoint definitions
+│   ├── services/               # Core business logic
+│   │   ├── ab_testing.py       # A/B test sticky assignment
+│   │   ├── embeddings.py       # Embedding generation (v1: 64-dim, v2: 128-dim)
+│   │   ├── similarity.py       # Cosine similarity search
+│   │   └── predictor.py        # Performance prediction from historical CTR
+│   ├── utils/                  # Utilities
+│   │   ├── logging_config.py   # Structured logging with correlation IDs
+│   │   └── data_loader.py      # Google Drive data loader
+│   └── instrumentation/        # Monitoring
+│       └── metrics.py          # Request/latency/A/B metrics collection
+├── frontend/                   # Frontend (React + TypeScript + Vite)
 │   ├── src/
-│   │   ├── components/      # React components
-│   │   ├── pages/           # Page components
-│   │   ├── lib/             # API service layer
-│   │   └── hooks/           # Custom hooks
-│   ├── public/              # Static assets
-│   └── package.json         # Frontend dependencies
-├── data/                    # Data files (downloaded from Google Drive)
-├── tests/                   # Unit tests
-├── Dockerfile               # Backend container
-└── UI_INTEGRATION.md        # Integration documentation
+│   │   ├── components/         # Reusable React components
+│   │   │   ├── search/         # Search form and results
+│   │   │   ├── predict/        # Prediction form and results
+│   │   │   └── metrics/        # Metrics dashboard
+│   │   ├── pages/              # Main page components
+│   │   ├── lib/api.ts          # Backend API client
+│   │   └── hooks/              # Custom React hooks
+│   ├── public/                 # Static assets
+│   └── package.json            # Frontend dependencies
+├── data/                       # Data files (auto-downloaded from Google Drive)
+│   ├── mock_embeddings_v1.pkl  # v1 model embeddings (64-dim)
+│   ├── mock_embeddings_v2.pkl  # v2 model embeddings (128-dim)
+│   ├── app_metadata.pkl        # App names and categories
+│   ├── sample_apps.csv         # Sample apps for testing
+│   └── historical_performance.csv  # Real CTR data for predictions
+├── scripts/                    # Data generation scripts
+│   └── generate_real_embeddings.py  # Generate embeddings for historical apps
+├── tests/                      # Unit tests
+├── Dockerfile                  # Backend container image
+├── DOCUMENTATION.md            # Comprehensive documentation
+├── architecture-diagram.md     # System architecture diagrams
+└── README.md                   # This file
 ```
 
-## Architecture
+## Documentation
 
-See [architecture-diagram.md](architecture-diagram.md) for detailed flow diagrams.
+- **[DOCUMENTATION.md](DOCUMENTATION.md)** - Complete setup, usage guide, API reference, troubleshooting
+- **[architecture-diagram.md](architecture-diagram.md)** - Backend architecture and data flow diagrams
+- **[SETUP_GDRIVE.md](SETUP_GDRIVE.md)** - Google Drive configuration for data files
+
+## Key Technologies
+
+- **Backend**: FastAPI, Pydantic, NumPy, Pandas, Uvicorn
+- **Frontend**: React 18, TypeScript, Vite, TanStack Query, Tailwind CSS, shadcn/ui
+- **Testing**: Pytest
+- **Deployment**: Docker, environment-based configuration
+
+## Contributing
+
+This is a technical assignment project. For questions or issues, please refer to [DOCUMENTATION.md](DOCUMENTATION.md) or the inline code documentation.
+
+## License
+
+Proprietary - MobUpps A/B Testing Assignment
