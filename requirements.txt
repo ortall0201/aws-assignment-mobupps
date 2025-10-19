@@ -1,5 +1,8 @@
 fastapi==0.115.0
 uvicorn[standard]==0.30.6
-pydantic==1.10.15
+pydantic==2.10.6
+pydantic-settings==2.7.1
 numpy==2.1.1
 pandas==2.2.2
+gdown==5.2.0
+pytest==8.3.4
