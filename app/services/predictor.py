@@ -9,15 +9,28 @@ logger = get_logger(__name__)
 
 
 class PerformancePredictor:
-    def __init__(self, arm: str):
+    def __init__(self, arm: str, performance_data: dict = None):
+        """
+        Initialize predictor with A/B test arm and optional cached performance data.
+
+        Args:
+            arm: A/B test arm ('v1' or 'v2')
+            performance_data: Optional pre-loaded performance data dict (for caching)
+        """
         if arm not in ["v1", "v2"]:
             raise ValueError(f"arm must be 'v1' or 'v2', got {arm}")
         self.arm = arm
-        try:
-            self._performance_data = self._load_performance_data()
-        except Exception as e:
-            logger.error(f"Failed to load performance data: {str(e)}")
-            self._performance_data = {}
+
+        # Use cached data if provided, otherwise load from file
+        if performance_data is not None:
+            self._performance_data = performance_data
+            logger.info(f"Using cached performance data ({len(performance_data)} apps)")
+        else:
+            try:
+                self._performance_data = self._load_performance_data()
+            except Exception as e:
+                logger.error(f"Failed to load performance data: {str(e)}")
+                self._performance_data = {}
 
     def _load_performance_data(self):
         """

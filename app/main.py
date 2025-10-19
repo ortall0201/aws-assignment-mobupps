@@ -3,6 +3,8 @@ from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 import uuid
 import time
+import pandas as pd
+import os
 from app.routers.health import router as health_router
 from app.routers.api_v1 import router as api_v1_router
 from app.utils.data_loader import ensure_data_files
@@ -24,6 +26,49 @@ app.add_middleware(
 )
 
 
+def load_performance_data_cache():
+    """
+    Load historical performance data once at startup for caching.
+
+    Returns:
+        Dict mapping app_id to performance metrics
+    """
+    perf_path = 'data/historical_performance.csv'
+    if os.path.exists(perf_path):
+        try:
+            logger.info(f"Loading performance data from {perf_path}...")
+            df = pd.read_csv(perf_path)
+
+            # Validate required columns
+            required_cols = ['app_id', 'clicks', 'impressions']
+            missing_cols = [col for col in required_cols if col not in df.columns]
+            if missing_cols:
+                logger.error(f"Missing required columns: {missing_cols}")
+                return {}
+
+            # Aggregate performance metrics by app_id
+            agg = df.groupby('app_id').agg({
+                'clicks': 'sum',
+                'impressions': 'sum',
+                'event_count': 'sum' if 'event_count' in df.columns else 'count',
+                'mmp_offer_default_revenue': 'mean' if 'mmp_offer_default_revenue' in df.columns else 'mean'
+            }).reset_index()
+
+            # Calculate CTR (Click-Through Rate) as performance score
+            agg['ctr'] = agg['clicks'] / (agg['impressions'] + 1)
+
+            perf_data = agg.set_index('app_id').to_dict('index')
+            logger.info(f"Cached performance data for {len(perf_data)} apps")
+            return perf_data
+
+        except Exception as e:
+            logger.error(f"Error loading performance data: {str(e)}")
+            return {}
+    else:
+        logger.warning(f"Performance data file not found: {perf_path}")
+        return {}
+
+
 @app.on_event("startup")
 async def startup_event():
     """Initialize application on startup"""
@@ -34,6 +79,9 @@ async def startup_event():
     # Download data files from Google Drive on startup
     ensure_data_files()
     logger.info("Data files loaded successfully")
+
+    # Cache performance data for fast predictions
+    app.state.performance_data_cache = load_performance_data_cache()
 
 
 @app.middleware("http")

@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Request
 from time import perf_counter
 from app.models.schemas import SimilarRequest, SimilarResponse, PredictRequest, PredictResponse
 from app.config import settings
@@ -69,9 +69,9 @@ def find_similar(req: SimilarRequest):
 
 
 @router.post("/predict", response_model=PredictResponse)
-def predict(req: PredictRequest):
+def predict(req: PredictRequest, request: Request):
     """
-    Predict performance based on similar apps.
+    Predict performance based on similar apps using cached performance data.
 
     Raises:
         HTTPException: 400 for invalid input, 500 for server errors
@@ -87,7 +87,9 @@ def predict(req: PredictRequest):
         if req.ab_arm not in ["v1", "v2"]:
             raise HTTPException(status_code=400, detail="ab_arm must be 'v1' or 'v2'")
 
-        predictor = PerformancePredictor(req.ab_arm)
+        # Use cached performance data from app startup
+        cached_data = getattr(request.app.state, 'performance_data_cache', None)
+        predictor = PerformancePredictor(req.ab_arm, performance_data=cached_data)
         pred = predictor.predict(req.app.dict(), req.neighbors)
         latency_ms = int((perf_counter() - t0) * 1000)
 
