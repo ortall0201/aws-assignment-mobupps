@@ -4,7 +4,7 @@ ML Production System for App Similarity & Performance Prediction
 MobUpps Home Assignment
 ================================================================================
 
-Author: Assignment Submission
+Author: Ortal Lasry | ML Engineer
 Date: October 2025
 Version: 1.0
 
