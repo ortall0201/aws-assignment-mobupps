@@ -49,6 +49,30 @@ docker build -t aws-assignment-mobupps:local .
 docker run -p 8000:8000 --env-file .env aws-assignment-mobupps:local
 ```
 
+## Web UI Dashboard
+
+A modern React dashboard is available for this API at:
+**Repository**: `https://github.com/ortall0201/mobdups-lab-suite`
+
+### Quick Setup
+```bash
+# Clone UI repository
+git clone https://github.com/ortall0201/mobdups-lab-suite
+cd mobdups-lab-suite
+
+# Install and run
+npm install
+npm run dev
+```
+
+The UI will be available at `http://localhost:5173` and includes:
+- **Search Page**: Interactive similarity search with A/B testing
+- **Predict Page**: Performance prediction interface
+- **Metrics Dashboard**: Real-time operational metrics with auto-refresh
+- **API Docs**: Integrated API documentation
+
+See `UI_INTEGRATION.md` for detailed integration documentation.
+
 ## API Endpoints
 
 ### Health Check
