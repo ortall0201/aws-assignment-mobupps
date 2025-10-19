@@ -56,6 +56,16 @@ docker run -p 8000:8000 --env-file .env aws-assignment-mobupps:local
 GET /healthz
 ```
 
+### Metrics
+```
+GET /metrics
+```
+Returns operational metrics including:
+- Request counts (total, by endpoint, by status code)
+- Latency statistics (avg, min, max, p50, p95, p99)
+- A/B test assignments by arm and endpoint
+- Error counts by type
+
 ### Find Similar Apps
 ```
 POST /api/v1/find-similar
@@ -102,6 +112,27 @@ Content-Type: application/json
 ```bash
 pytest -q
 ```
+
+## Logging & Monitoring
+
+### Structured Logging
+The API includes structured logging with:
+- Correlation ID tracking across requests
+- Request/response logging with timing
+- A/B test assignment logging
+- Colorized console output for development
+- JSON output for production (set `structured=True` in `main.py`)
+
+All logs include correlation IDs for tracing requests across services.
+
+### Metrics Collection
+Real-time metrics are collected for:
+- **Request Metrics**: Total requests, requests per endpoint, status code distribution
+- **Latency Metrics**: Average, min, max, and percentiles (p50, p95, p99) per endpoint
+- **A/B Test Metrics**: Assignment counts by arm and endpoint
+- **Error Metrics**: Total errors and errors by type
+
+Access metrics via `GET /metrics` endpoint.
 
 ## Project Structure
 
