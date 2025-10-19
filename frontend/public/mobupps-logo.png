@@ -1,0 +1,273 @@
+
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="">
+            <title>404 Oops... Let&#039;s find another page! | Mobupps</title>
+        <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name='impact-site-verification' value='437927221'>
+    <meta name="agd-partner-manual-verification" />
+
+    <script src="/js/lazysizes.min.js" async=""></script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.min.css?m22">
+        <style type="text/css">
+        .main-404-img {
+            text-align: center;
+        }
+
+        .main-404-img img {
+            width: 55%;
+        }
+
+        .oops404 {
+            text-align: center;
+            font-size: 5rem;
+        }
+
+        .main-404-text {
+            padding-top: 2rem;
+        }
+
+        .main-404-text span.yello {
+            background: linear-gradient(transparent 60%, #f0c61a 60%, #f0c61a 78%, transparent 78%);
+        }
+
+        @media (max-width: 760px) {
+            .main-404-img img {
+                width: 100%;
+            }
+
+            .oops404 {
+                font-size: 3rem;
+            }
+
+            .oops404 span.mid-frase {
+                display: block;
+            }
+
+        }
+    </style>
+
+    <link rel="icon" href="/images/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-NFHP9LV');</script>
+    <!-- End Google Tag Manager -->
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NFHP9LV"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="main">
+    <nav class="navbar navbar-expand-lg fixed-top bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand logo" href="/"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">Main</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Products
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/mafo">MAFO</a></li>
+                            <li><a class="dropdown-item" href="/mobuppsx">MOBUPPSX</a></li>
+                            <li><a class="dropdown-item" href="/irtb">iRTB</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/cases">Cases</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/careers">Careers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/contact">Contact us</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+        <div class="main-404-img">
+        <img class="after760" src="/images/404/404.png">
+        <img class="before760" src="/images/404/404_mob.png">
+    </div>
+    <div class="main-404-text">
+        <div class="oops404">Oops... <span class="mid-frase">Let's find</span> <span class="yello">another page!</span></div>
+    </div>
+
+    <div class="row thelab">
+    <div class="col col3">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <a href="/blog">
+                        <h2 class="cnt whiteLetters lab">
+                            <span class="apricot cursor-lab-menu">The Lab<div></div></span>
+                        </h2>
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="/contact">
+                        <h2 class="cnt whiteLetters lab">
+                            <span class="apricot contact-cursor">Connect<div></div></span>
+                        </h2>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="row footer">
+    <div class="col">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 icons">
+                    <a href="https://www.linkedin.com/company/10212650/"><img
+                            src="/images/icons/link_in.svg"></a>
+
+
+                    <a href="https://www.facebook.com/mobupps"><img src="/images/icons/facebook.webp" style="width: 42px"></a>
+                    <a href="https://www.youtube.com/@mobupps"><img src="/images/icons/youtube.svg"></a>
+                </div>
+                <div class="col-md-3 menu-bottom">
+                    <div class="footer-menu-title">MENU</div>
+                    <a class="footer-menu" href="/">Main</a>
+                    <a class="footer-menu" href="/mafo">MAFO</a>
+                    <a class="footer-menu" href="/mobuppsx">MOBUPPSX</a>
+                    <a class="footer-menu" href="/irtb">iRTB</a>
+                    <a class="footer-menu" href="/cases">Cases</a>
+                    <a class="footer-menu" href="/careers">Careers</a>
+                    <a class="footer-menu" href="/blog">Blog</a>
+                    <a class="footer-menu" href="/contact">Contact Us</a>
+                </div>
+                <div class="col-md-3 rerms-bottom">
+                    <div class="footer-menu-title">TERMS</div>
+                    <a class="footer-menu" href="/pdf/Terms_and_Conditions.pdf">Terms and Conditions</a>
+                    <a class="footer-menu" href="/pdf/Mobupps_Privacy_policy.pdf">Privacy policy</a>
+                </div>
+                <div class="col-md-3 subs-bottom">
+                    <div class="footer-menu-title">SUBSCRIPTION</div>
+                    <form action="https://wmadv.us3.list-manage.com/subscribe/post?u=2c64806acae77252d56319cde&amp;id=915939982e" method="post">
+                        <div class="subscription">
+                            <input name="EMAIL" type="email" placeholder="your e-mail" required>
+                            <span class="aj-submit">
+                                <input class="submit-img" type="image" src="/images/icons/arrow.svg" width="53" height="53" alt="Submit Form">
+                                <!-- img class="arrow cursor" src="/images/icons/arrow.svg" -->
+                            </span>
+                            <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                                <input type="text" name="b_2c64806acae77252d56319cde_915939982e" tabindex="-1" value="">
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+</div>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script async src="/js/bootstrap/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+
+
+
+<script src="/js/main.min.js?m222"></script>
+</body>
+</html>
+
