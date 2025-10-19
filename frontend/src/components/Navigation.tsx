@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { Search, BarChart3, FileText, Zap, Moon, Sun } from "lucide-react";
+import { Search, BarChart3, Zap, Moon, Sun } from "lucide-react";
 import { Button } from "./ui/button";
 import { useTheme } from "./ThemeProvider";
 
@@ -7,7 +7,6 @@ const navItems = [
   { to: "/", label: "Search", icon: Search },
   { to: "/predict", label: "Predict", icon: Zap },
   { to: "/metrics", label: "Metrics", icon: BarChart3 },
-  { to: "/docs", label: "API Docs", icon: FileText },
 ];
 
 export const Navigation = () => {

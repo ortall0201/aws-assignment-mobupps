@@ -8,7 +8,6 @@ import { Layout } from "@/components/Layout";
 import Search from "./pages/Search";
 import Predict from "./pages/Predict";
 import Metrics from "./pages/Metrics";
-import ApiDocs from "./pages/ApiDocs";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -25,7 +24,6 @@ const App = () => (
               <Route path="/" element={<Search />} />
               <Route path="/predict" element={<Predict />} />
               <Route path="/metrics" element={<Metrics />} />
-              <Route path="/docs" element={<ApiDocs />} />
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>
