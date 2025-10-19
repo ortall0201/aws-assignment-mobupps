@@ -166,13 +166,13 @@ Display Results
 
 2. **Start Frontend**:
    ```bash
-   cd C:\Users\user\Desktop\mobdups-lab-suite
+   cd C:\Users\user\Desktop\aws-assignment-mobupps\frontend
    npm install
    npm run dev
    ```
 
 3. **Access**:
-   - UI: `http://localhost:5173`
+   - UI: `http://localhost:8080`
    - API Docs: `http://localhost:8000/docs`
    - Metrics: `http://localhost:8000/metrics`
 
@@ -283,22 +283,22 @@ Display Results
 
 ---
 
-## 📚 Repositories
+## 📚 Repository
 
-### Backend
+### Unified Project Structure
 - **Path**: `C:\Users\user\Desktop\aws-assignment-mobupps`
-- **Stack**: Python 3.11, FastAPI, Pydantic, Pandas, NumPy
+- **Backend Stack**: Python 3.11, FastAPI, Pydantic, Pandas, NumPy
+- **Frontend Stack**: React, TypeScript, Vite, Tailwind CSS, shadcn/ui, TanStack Query
+- **Structure**:
+  - `app/` - Backend API
+  - `frontend/` - UI Dashboard
+  - `tests/` - Unit tests
+  - `data/` - Data files
 - **Recent Commits**:
+  - Add frontend UI to unified repository structure
   - Add UI dashboard reference to README
   - Add CORS support and UI integration documentation
   - Add logging and metrics instrumentation to API
-
-### Frontend
-- **Repository**: https://github.com/ortall0201/mobdups-lab-suite
-- **Path**: `C:\Users\user\Desktop\mobdups-lab-suite`
-- **Stack**: React, TypeScript, Vite, Tailwind CSS, shadcn/ui, TanStack Query
-- **Recent Commits**:
-  - Integrate frontend with MobUpps FastAPI backend
 
 ---
 
