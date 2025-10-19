@@ -56,13 +56,13 @@ The MobUpps A/B Testing System is a production-ready application similarity and 
 ┌─────────────────────────────────────────┐
 │         Frontend (React)                │
 │  ┌─────────────────────────────────┐   │
-│  │  Search Page                    │   │
+│  │  Search Page (FUNCTIONAL)       │   │
 │  │  - Find Similar Apps            │   │
 │  │  - Predict Performance (inline) │   │
 │  ├─────────────────────────────────┤   │
-│  │  Metrics Dashboard              │   │
-│  │  - Real-time monitoring         │   │
-│  │  - A/B test statistics          │   │
+│  │  Metrics Dashboard (UI MOCKUP)  │   │
+│  │  - Demo UI layout only          │   │
+│  │  - Not connected to backend     │   │
 │  └─────────────────────────────────┘   │
 └────────┬────────────────────────────────┘
          │ REST API
@@ -291,9 +291,11 @@ The UI will be available at `http://localhost:8080`
 - **"Predict Performance" button** - One-click prediction
 - Shows inline prediction results
 
-**MetricsOverview.tsx**
-- Real-time metrics display
-- Calculates success rate from status codes
+**MetricsOverview.tsx** (⚠️ UI Mockup Component)
+- Demo component showing metrics layout
+- Static data for demonstration only
+- Not connected to real backend metrics
+- For real metrics, use backend API: `GET http://localhost:8000/metrics`
 
 ---
 
