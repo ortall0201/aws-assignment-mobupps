@@ -1,0 +1,1 @@
+# Placeholder for mock_embeddings_v2.pkl
