@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
 import uuid
 import time
 from app.routers.health import router as health_router
@@ -7,10 +8,20 @@ from app.routers.api_v1 import router as api_v1_router
 from app.utils.data_loader import ensure_data_files
 from app.utils.logging import setup_logging, set_correlation_id, get_logger, log_request, log_response
 from app.instrumentation.metrics import record_request, get_metrics_summary
+from app.config import settings
 
 
 app = FastAPI(title="MobUpps – AB Similarity & Predict API", version="1.0.0")
 logger = get_logger(__name__)
+
+# Configure CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=settings.cors_origins_list,
+    allow_credentials=settings.CORS_ALLOW_CREDENTIALS,
+    allow_methods=settings.CORS_ALLOW_METHODS,
+    allow_headers=settings.CORS_ALLOW_HEADERS,
+)
 
 
 @app.on_event("startup")
